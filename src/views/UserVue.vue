@@ -8,8 +8,9 @@
       <hr />
       <div class="childComponent">
         <!-- child componentte value olarak gönderilen veri bu kısımda $event olarak okunuyor !!!  -->
-        <user-detail :name="title" @data="childData = $event" />
-        <user-edit />
+        <!-- prop olarak veri gönderirken v-on @ değil v-bind : olarak ggöndericeksin :D  -->
+        <user-detail :name="title" @data="childData = $event" :age="age" />
+        <user-edit :age="age" :setAge="setAge" @ageWasEdited="age = $event" />
       </div>
     </div>
   </div>
@@ -29,9 +30,13 @@ export default {
     return {
       title: "Yunus",
       childData: "",
+      age: 23,
     };
   },
   methods: {
+    setAge(age) {
+      this.age = age;
+    },
     changeName() {
       this.title = "Hidayet";
     },
